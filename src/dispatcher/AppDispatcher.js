@@ -1,20 +1,21 @@
 import Dispatcher from './Dispatcher'
 import assign from 'object-assign'
 
-var AppDispatcher = assign({}, Dispatcher.prototype, {
+class ViewDispatcher extends Dispatcher {
 
   /**
    * A bridge function between the views and the dispatcher, marking the action
    * as a view action.  Another variant here could be handleServerAction.
    * @param  {object} action The data coming from the view.
    */
-  handleViewAction: function(action) {
-    this.dispatch({
+  handleViewAction(action) {
+    super.dispatch({
       source: 'VIEW_ACTION',
       action: action
     });
   }
+}
 
-});
+var AppDispatcher = new ViewDispatcher();
 
-module.exports = AppDispatcher;
+export default AppDispatcher

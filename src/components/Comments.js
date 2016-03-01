@@ -30,6 +30,9 @@ var CommentBox = React.createClass({
   handleCommentSubmit: function(comment) {
     CommentStore.addComment(comment)
   },
+  onChange: function() {
+    this.setState({data: CommentStore.getAll()})
+  },
   getInitialState: function() {
     return {data: CommentStore.getAll()};
   },
@@ -38,9 +41,6 @@ var CommentBox = React.createClass({
   },
   componentWillUnmount: function() {
     CommentStore.removeChangeListener(this.onChange)
-  },
-  onChange: function() {
-    this.setState({data: CommentStore.getAll()})
   },
   render: function() {
     return (
